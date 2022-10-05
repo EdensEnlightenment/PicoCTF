@@ -1,0 +1,3 @@
+https://mercury.picoctf.net/static/8e33ede04d02f3765b8c6a6e24d72733/ende.py
+https://mercury.picoctf.net/static/8e33ede04d02f3765b8c6a6e24d72733/flag.txt.en
+https://mercury.picoctf.net/static/8e33ede04d02f3765b8c6a6e24d72733/pw.txt

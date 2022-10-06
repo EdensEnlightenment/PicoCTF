@@ -121,7 +121,7 @@ First off, we'll try `$ cat 1of3.flag.txt` to get what appears to be the first t
 
 Next, we'll do the same for the instructions file, which gives us the following.
 
-`Next, go to the root of all things, more succinctly \`/\``. Once again, easy enough - just `$ cd /` and `$ ls`, and voila - hidden amongst the system directories, we have a few more interesting items.
+`Next, go to the root of all things, more succinctly /`. Once again, easy enough - just `$ cd /` and `$ ls`, and voila - hidden amongst the system directories, we have a few more interesting items.
 
 ```
 2of3.flag.txt  dev   instructions-to-3of3.txt  media  proc  sbin  tmp
@@ -131,7 +131,7 @@ boot	       home  lib64		       opt    run   sys   var
 
 Let's stick with old faithful and try `$ cat 2of3.flag.txt`, giving us the second third of the flag.
 
-We do the same with the instructions file and are told `Lastly, ctf-player, go home... more succinctly \`~\``
+We do the same with the instructions file and are told `Lastly, ctf-player, go home... more succinctly ~`
 
 Once again, easy enough - `$ cd ~` `$ ls` give us the following - `3of3.flag.txt  drop-in`.
 

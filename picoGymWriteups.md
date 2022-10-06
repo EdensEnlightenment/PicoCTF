@@ -81,3 +81,78 @@ A simple `$ cat static.ltdis.strings.txt` outputs quite a lot of strings found i
 Using grep, we can filter the output of a given command by executing it and 'piping' it into grep, like so. `$ cat static.ltdis.strings.txt | grep 'pico'` - this searches the output for any strings which match the case sensitive input, and returns only those rather than the full output.
 
 `picoCTF{d15a5m_t34s3r_1e6a7731}` - another flag found!
+
+## Tab, Tab, Attack
+
+### Provided input(s): `Addadshashanammu.zip` - zipped file containing a bunch of nested subdirectories
+
+I assume the intent here is to teach new CLI users that tab is useful for navigating directories - first just unzip the file with `$ unzip Addadshashanammu.zip`, then `$ cd A<tab>/<tab>` ad nauseam till you reach the bottom of the directory.
+
+Alternatively, a tool I'm fond of is `tree` - you can generally get it through your package manager of choice be it brew, apt, pacman, etc., and then use it like ` $ tree` in the directory you want to see the expanded structure of. It shows all subdirectories and their nested content, so it can be helpful to visualize large/confusing directories.
+
+With `tree` it's easy to see that the bottommost directory/file is `fang-of-haynekhtnamet` - so, let's use old faithful, `cat`, to see what's inside.
+
+```
+$ cat Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/Onnissiralis/Ularradallaku/fang-of-haynekhtnamet
+HH/lib64/ld-linux-x86-64.so.2GNUGNU���|�%Z6ژU=
+8#TT 1tt$DN                                     Y h "libc.so.6puts__cxa_finalize__li�� ��0)@�mV``^o�(
+```
+
+Okay, that's a bunch of gibberish, so we're not quite out of the woods yet. We need to figure out what the heck that `fang ...` file is - so, let's get into the directory it's in so we have an easier time of working with it, first off.
+
+`$ cd Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/Onnissiralis/Ularradallaku`
+
+One command we can use to try to identify the file is, well, `file` - 
+
+``` 
+$ file -I fang-of-haynekhtnamet
+fang-of-haynekhtnamet: application/x-pie-executable; charset=binary
+```
+
+So, it looks like this is an executable file. If we try to execute it however we receive the message `zsh: exec format error: ./fang-of-haynekhtnamet` - this is probably because I'm running on a Mac and not a Linux machine. Trying to execute the file in the PicoCTF web terminal outputs the flag.
+
+## Magikarp Ground Mission
+
+### Provided input(s): `$ ssh ctf-player@venus.picoctf.net -p 58707`, SSH host to connect to after starting the instance, unique passwod.
+
+Once SSHed into the host, we can use `$ ls` to see that in the home directory there's two files; `1of3.flag.txt` and `instructions-to-2of3.txt`. The SSH host we are connected to is a 'minimized' system without many functions that we are used to. we can use `$ unminimize` if we want to download some core packages, but for now we'll leave it minimized.
+
+First off, we'll try `$ cat 1of3.flag.txt` to get what appears to be the first third of our flag. Easy enough so far.
+
+Next, we'll do the same for the instructions file, which gives us the following.
+
+`Next, go to the root of all things, more succinctly \`/\``. Once again, easy enough - just `$ cd /` and `$ ls`, and voila - hidden amongst the system directories, we have a few more interesting items.
+
+```
+2of3.flag.txt  dev   instructions-to-3of3.txt  media  proc  sbin  tmp
+bin	       etc   lib		       mnt    root  srv   usr
+boot	       home  lib64		       opt    run   sys   var
+```
+
+Let's stick with old faithful and try `$ cat 2of3.flag.txt`, giving us the second third of the flag.
+
+We do the same with the instructions file and are told `Lastly, ctf-player, go home... more succinctly \`~\``
+
+Once again, easy enough - `$ cd ~` `$ ls` give us the following - `3of3.flag.txt  drop-in`.
+
+Catting the flag gives us the final part of it, but now what's the easiest way to combine them? There's a few ways of doing this, but the easiest in my opinion is to move each file to the same directory, then cat all three in order. Let's use our home (~) directory, for example.
+
+We can check where the files are without CDing everywhere by `ls`ing a specific directory, like so - `$ ls drop-in`, to see that the first part of the flag is there. From ~, we'll just move the file - `$ mv drop-in/1of3.flag.txt .` - mv for move, then the file we're moving, then the directory we're moving it to - `.` is short for 'current directory', which in this case is ~.
+
+Next we'll do the same thing for the third part of the flag - `$ mv /3of3.flag.txt .`, and then an `$ ls` to make sure everything is in our home directory now. If that shows all three parts, we just need to combine them now! We can try `cat` with multiple files provided as arguments by just listing them one after the other.
+
+```
+$ cat 1of3.flag.txt 2of3.flag.txt 3of3.flag.txt
+picoCTF{xxsh_
+0ut_0f_\/\/4t3r_
+5190b070}
+```
+
+Well, that doesn't look quite right - we can filter the output of our `cat` with the `tr`, or 'translate' command.
+
+```
+cat 1of3.flag.txt 2of3.flag.txt 3of3.flag.txt | tr -d '\n'
+picoCTF{xxsh_0ut_0f_\/\/4t3r_5190b070}
+```
+
+Perfect! By piping the output of our initial `cat` to `tr` with the `-d` (for delete) argument, and then providing '\n' - the newline character, as the element we want to delete, it outputs the initial `cat` output but removes the newline characters, resulting in everything coming out on one line, nice and easy to copy + paste into the flag checker. Voila!

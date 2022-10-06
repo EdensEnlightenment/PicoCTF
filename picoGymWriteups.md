@@ -1,13 +1,13 @@
-General Skills:
+# General Skills:
 
-	Obedient Cat:
+	## Obedient Cat:
 		Provided input(s): file named "flag" with no extension
 		Hint 3 suggests to try entering "man cat"
 		This opens the manual page for the "cat" command, short for "concatenate and print files", which outputs the contents of a file to std out.
 		Inspired by the hint, the intended solution is probably to run "cat flag" and grab the flag from that output.
 		I personally just opened the file with Nano, which displays the same information as if you were to run "cat flag"
 
-	Python Wrangling:
+	## Python Wrangling:
 		Provided input(s): files named ende.py, pw.txt, flag.txt.en
 		Looking at ende.py in an editor, we can see the following interesting lines of code - 
 			
@@ -27,7 +27,12 @@ General Skills:
 			> aa821c16aa821c16aa821c16aa821c16
 			picoCTF{4p0110_1n_7h3_h0us3_aa821c16}
 		Voila! There we have our flag.
-	Wave a flag:
+	## Wave a flag:
 		Provided input(s): a file called "warm" with no extension, which the prompt describes as a program.
 		One of the hints suggests that this file/program is only usable on Linux, and provides information on making it executable using "cmhod +x warm".
-
+		Due to the fact that both my laptop and my Raspberry Pi use an ARM CPU, I'm unable to run the provided warm file, so to the PicoCTF-provided web terminal we go.
+		wget the "warm" file, then in the same directory run "chmod +x warm" to make it executable. Now, you can run it by typing "./warm" in the directory it is located in.
+		Upon first run, it outputs "Hello user! Pass me a -h to learn what I can do!" - simple enough! Try running it again but this time as "./warm -h" to pass the -h (usually short for --help) argument.
+			
+			Oh, help? I actually don't do much, but I do have this flag here: picoCTF{b1scu1ts_4nd_gr4vy_755f3544}
+		And just like that, we have another flag!

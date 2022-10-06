@@ -17,6 +17,6 @@ Prepares all files in directory and subdirectories to be pushed
 
 Commits changes but does not push
 
-`$ git push origin main`
+`$ git push`
 
 Pushes changes

@@ -4,4 +4,5 @@ This repo is mostly for my own use but I figured I'd make it public just in case
 
 # Index of writeup pages:
 
-[PicoGym Writeups]()
+[PicoGym Writeups](https://github.com/EdensEnlightenment/PicoCTF/blob/main/Writeups/picoGymWriteups.md)
+

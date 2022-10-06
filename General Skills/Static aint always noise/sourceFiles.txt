@@ -1,0 +1,3 @@
+https://mercury.picoctf.net/static/bc72945175d643626d6ea9a689672dbd/static
+
+https://mercury.picoctf.net/static/bc72945175d643626d6ea9a689672dbd/ltdis.sh

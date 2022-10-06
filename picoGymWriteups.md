@@ -43,6 +43,7 @@ picoCTF{4p0110_1n_7h3_h0us3_aa821c16}
 Voila! There we have our flag.
 
 ## Wave a flag:
+
 ### Provided input(s): a file called "warm" with no extension, which the prompt describes as a program.
 
 One of the hints suggests that this file/program is only usable on Linux, and provides information on making it executable using `cmhod +x warm`.
@@ -56,3 +57,27 @@ Upon first run, it outputs "Hello user! Pass me a -h to learn what I can do!" - 
 `Oh, help? I actually don't do much, but I do have this flag here: picoCTF{b1scu1ts_4nd_gr4vy_755f3544}`
 
 And just like that, we have another flag!
+
+## Nice netcat...
+
+### Provided input(s): `$ nc mercury.picoctf.net 43239`
+
+Running the provided command writes a series of 2-3 digit numbers to std out. Hint 2 helpfully references reading/writing ASCII, so let's start there.
+
+Using [this](https://codebeautify.org/ascii-to-text) ASCII to text converter, we're able to translate the output of the command to `picoCTF{g00d_k1tty!_n1c3_k1tty!_7c0821f5}`. 
+
+One thing I did notice with this and similar flags, is that not all translation sites are created equal. Some don't handle newlines well, some don't like not having a leading 0 on the 2 digit numbers, etc., so if one site gives you gibberish or something that seems adjacent to what you want, don't hesitate to try using another site!
+
+## Static ain't always noise
+
+### Provided input(s): Binary file named `static`, BASH script named `ltdis.sh`
+
+The easy option here is of course to try running the provided script - opening the script shows that running with no arguments will suggest using it as `ltdis.sh <program-file>` - easy enough.
+
+Using `$ sh ltdis.sh static` tells us that `static` was successfully disassembled, and that the result is available at `static.ltdis.x86_64.txt`, and any strings found in the file have been written to `static.ltdis.strings.txt`.
+
+A simple `$ cat static.ltdis.strings.txt` outputs quite a lot of strings found in the binary, so let's try filtering it, shall we?
+
+Using grep, we can filter the output of a given command by executing it and 'piping' it into grep, like so. `$ cat static.ltdis.strings.txt | grep 'pico'` - this searches the output for any strings which match the case sensitive input, and returns only those rather than the full output.
+
+`picoCTF{d15a5m_t34s3r_1e6a7731}` - another flag found!

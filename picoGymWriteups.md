@@ -34,7 +34,7 @@ First, we'll check what pw.txt contains - this can be done with any text editor 
 In my case the pw appears to be `aa821c16aa821c16aa821c16aa821c16`, so we copy that, then run ende.py (**en**crypt, **de**crypt?) with the `-d` argument and pass it the `flag.txt.en` file.
 
 ```
-> python3.10 ende.py -d flag.txt.en
+$ python3.10 ende.py -d flag.txt.en
 Please enter the password:
 > aa821c16aa821c16aa821c16aa821c16
 picoCTF{4p0110_1n_7h3_h0us3_aa821c16}

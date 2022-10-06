@@ -1,5 +1,5 @@
-# Git Commands that I'll forget if I don't write down somewhere convenient -
-## clone --> add --> commit
+# Git Commands that I'll forget if I don't write down somewhere convenient
+## clone --> add --> commit --> push
 
 `$ git clone <url of repository>`
 
@@ -13,7 +13,7 @@ After making changes:
 
 Prepares all files in directory and subdirectories to be pushed
 
-`$ git commit -m <"commit message">
+`$ git commit -m <"commit message">`
 
 Commits changes but does not push
 

@@ -109,7 +109,7 @@ $ file -I fang-of-haynekhtnamet
 fang-of-haynekhtnamet: application/x-pie-executable; charset=binary
 ```
 
-So, it looks like this is an executable file. If we try to execute it however we receive the message `zsh: exec format error: ./fang-of-haynekhtnamet` - this is probably because I'm running on a Mac and not a Linux machine. Trying to execute the file in the PicoCTF web terminal outputs the flag.
+So, it looks like this is an executable file. If we try to execute it however we receive the message `zsh: exec format error: ./fang-of-haynekhtnamet` - this is because I'm running on an ARM system and not an x86_64 Linux machine. Trying to execute the file in the PicoCTF web terminal outputs the flag.
 
 ## Magikarp Ground Mission
 
